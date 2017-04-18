@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Litter Demo</string>
+    <string name="app_server">http://192.168.43.113:8081</string>
+
+    <!--RegisterActivity-->
+    <string name="mobile">Mobile</string>
+    <string name="commit">Commit</string>
+
+    <string name="input">input your password</string>
+    <string name="login">Login</string>
+    <string name="success">Success!</string>
+</resources>
