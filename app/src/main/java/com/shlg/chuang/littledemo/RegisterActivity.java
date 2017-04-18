@@ -7,13 +7,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.shlg.chuang.littledemo.entity.MobileNumber;
+import com.shlg.chuang.littledemo.remote.api.MobileNumberApi;
 import com.shlg.chuang.littledemo.util.HttpUtil;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.fastjson.FastJsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -26,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                requestRegister(mobileEditText.getText().toString());
+                requestRegister2(mobileEditText.getText().toString());
             }
         });
     }
@@ -62,6 +68,32 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
                 }
+
+            }
+        });
+    }
+
+    private void requestRegister2(String mobileString) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mobile", mobileString);
+        Retrofit retrofit = new Retrofit.Builder().
+                baseUrl(getResources().getString(R.string.app_server))
+                .addConverterFactory(FastJsonConverterFactory.create())
+                .build();
+        MobileNumberApi mobileNumberApi = retrofit.create(MobileNumberApi.class);
+        retrofit2.Call<MobileNumber> call = mobileNumberApi.userRegister(params);
+        call.enqueue(new retrofit2.Callback<MobileNumber>() {
+            @Override
+            public void onResponse(retrofit2.Call<MobileNumber> call, retrofit2.Response<MobileNumber> response) {
+                if (response.isSuccessful()) {
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<MobileNumber> call, Throwable t) {
 
             }
         });
