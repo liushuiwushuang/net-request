@@ -88,13 +88,23 @@ public class RegisterActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                 } else {
-
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(RegisterActivity.this, "return code error", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
 
             @Override
             public void onFailure(retrofit2.Call<MobileNumber> call, Throwable t) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(RegisterActivity.this, "return code error", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
